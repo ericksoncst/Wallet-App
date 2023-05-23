@@ -29,6 +29,12 @@ function Cards() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Cards</Text>
+      {data?.map(card => (
+        <View key={card.id}>
+          <Text> {`Numero do cartao: ${card.number}`}</Text>
+          <Text> {`Nome: ${card.name}`}</Text>
+        </View>
+      ))}
     </View>
   );
 }
