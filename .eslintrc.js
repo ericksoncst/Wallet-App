@@ -17,11 +17,13 @@ module.exports = {
           },
     plugins: ['react', 'react-hooks', '@typescript-eslint'],
         rules: {
-      indent: ['error', 2, { SwitchCase: 1 }],
-      quotes: ['error', 'single', { avoidEscape: true }],
+          
+          indent: ['error', 2, { SwitchCase: 1 }],
+          quotes: ['error', 'single', { avoidEscape: true }],
       
       'no-empty-function': 'off',
       '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'error',
       'react/display-name': 'off',
       'react/prop-types': 'off',
     },
