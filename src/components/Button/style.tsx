@@ -5,7 +5,7 @@ export const StyledButton = styled.Pressable<{ color: string }>`
     height: 55px;
     width: 300px;
     backgroundColor: ${props => props.color}
-    margin: 0px 30px;
+    margin: 0px 30px 20px 30px;
     justify-content: center;
     align-items: center;
 `

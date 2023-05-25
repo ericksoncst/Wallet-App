@@ -1,0 +1,20 @@
+import React, { ReactElement } from 'react' 
+import { Container, CornerBottom, CornerTop } from './style';
+
+type ButtonProp = {
+    children: ReactElement 
+}
+
+function BgWrapper(props: ButtonProp) {
+  const { children } = props;
+    
+  return (
+    <Container>
+      <CornerTop />
+      {children}
+      <CornerBottom />
+    </Container>
+  )
+}
+
+export default BgWrapper;
