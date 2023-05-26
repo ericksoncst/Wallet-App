@@ -6,12 +6,13 @@ import BgWrapper from '../../components/Background';
 import { getAllCards } from '../../services';
 import { CardItem, CardInfo, CardTitle, List, ListContainer } from './style';
 
-type Card = {
-  cvv: string ;
-  id: string ;
-  name : string;
-  number : string;
-  expiration: string;
+interface Card {
+  id: string;
+  cardNumber: string;
+  cardName: string;
+  cardCvv: string;
+  cardExpiration: string;
+
 }
 
 
@@ -24,7 +25,7 @@ function Cards() {
   }, {refetchOnWindowFocus: false});
 
   function maskCreditCard(card: string) {
-    const maskedCard = '**** **** **** '+card.substr(-4);
+    const maskedCard = '**** **** **** '+card?.substr(-4);
     return maskedCard;
       
   }
@@ -41,9 +42,9 @@ function Cards() {
           return (
             <CardItem>
               <CardTitle>White Card</CardTitle>
-              <CardInfo height={18}> {item.name}</CardInfo>
-              <CardInfo > {maskCreditCard(item.number)}</CardInfo>
-              <CardInfo>Validade {item.expiration}</CardInfo>
+              <CardInfo height={18}> {item.cardName}</CardInfo>
+              <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
+              <CardInfo>Validade {item.cardExpiration}</CardInfo>
             </CardItem>
           )
         }}

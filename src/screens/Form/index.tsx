@@ -4,14 +4,15 @@ import { useFormik } from 'formik'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/root.routes';
 import BgWrapper from '../../components/Background';
-import MaskInput from 'react-native-mask-input';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { addCard } from '../../services';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Form'>;
 
 interface IForm {
   cardNumber: string;
-  name: string;
+  cardName: string;
   cardCvv: string;
   cardExpiration: string;
 
@@ -24,11 +25,11 @@ function Form({ navigation }: Props) {
     initialValues: {
       cardNumber: '',
       cardCvv: '',
-      name: '',
+      cardName: '',
       cardExpiration: '',
   
     },
-    onSubmit: (data) => console.log(data),
+    onSubmit: async (data: IForm) => await addCard(data),
     validateOnBlur: false,
     validateOnChange: false,
     validateOnMount: false,
@@ -45,19 +46,24 @@ function Form({ navigation }: Props) {
   return (
     <BgWrapper>
       <React.Fragment>
-        <MaskInput style={{
-          backgroundColor: '#FFF',
-          height: 45,
-          marginLeft: 30,
-          marginRight: 30,
-          borderRadius: 6,
-          paddingLeft: 16,
-          fontSize: 16
-        }} 
-        keyboardType='numeric'
-        onChangeText={ text => void handleChange('cardNumber',text.toString())}
-        value={values.cardNumber} 
-        placeholder='Número do cartào' />
+        <Input 
+          keyboardType='numeric'
+          handleChange={ (text) => void handleChange('cardNumber',text.toString())}
+          value={values.cardNumber} 
+          placeholder='Número do cartào' />
+        <Input 
+          handleChange={ (text) => void handleChange('cardName',text.toString())}
+          value={values.cardName} 
+          placeholder='Nome do Titular do cartão' />
+        <Input 
+          handleChange={ (text) => void handleChange('cardExpiration',text.toString())}
+          value={values.cardExpiration} 
+          placeholder='Vencimento' />
+        <Input 
+          keyboardType='numeric'
+          handleChange={ (text) => void handleChange('cardCvv',text.toString())}
+          value={values.cardCvv} 
+          placeholder='Cvv' />
         <Button 
           title='avançar' 
           handlePress={()=> handleSubmit()} 
