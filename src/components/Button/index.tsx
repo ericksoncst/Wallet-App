@@ -1,4 +1,5 @@
 import React from 'react'
+import { GestureResponderEvent } from 'react-native';
 import { ButtonText, StyledButton } from './style'
 
 
@@ -7,7 +8,7 @@ interface ButtonProps {
   title: string;
   disabled: boolean | false;
   textColor: string;
-  handlePress: ()=> void;
+  handlePress: (event: GestureResponderEvent) => void
 }
 
 function Button(props: ButtonProps) {

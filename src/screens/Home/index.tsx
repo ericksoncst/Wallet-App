@@ -12,7 +12,7 @@ function HomeScreen({navigation}: Props) {
 
   return (
     <BgWrapper>
-      <>
+      <React.Fragment>
         <TitleContainer>
           <Title>Wallet Test</Title>
         </TitleContainer>
@@ -30,7 +30,7 @@ function HomeScreen({navigation}: Props) {
             disabled={false} 
             handlePress={() => navigation.navigate('Form')} />
         </ButtonContainer>
-      </>
+      </React.Fragment>
     </BgWrapper>
   );
 }
