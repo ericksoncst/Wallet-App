@@ -1,18 +1,25 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 
+interface Card {
+  id: string;
+  cardNumber: string;
+  cardName: string;
+  cardCvv: string;
+  cardExpiration: string;
+
+}
+
 export const ListContainer = styled.View`
   justify-content: center;
 `
 
-export const List = styled(FlatList).attrs({
+export const List = styled(FlatList as new () => FlatList<Card>).attrs({
   contentContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center'
   }  
-})`
-
-`
+})``
 
 export const CardItem = styled.View`
     width: 300px;
@@ -34,24 +41,3 @@ export const CardTitle =  styled.Text`
   font-weight: 400;
   margin-bottom: 30px;
 `
-
-export const Tab = styled.View`
-  background-color: #FFF;
-  height: 70px;
-  flex-direction: row;
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-  justify-content: center;
-  align-items: center;
-`
-
-export const TabTitle = styled.Text`
-  font-size: 20px;
-  color: #12C2E9;
-`
-

@@ -61,18 +61,20 @@ export default function App() {
                 
             })}
           />
-          <RootStack.Screen name="CardSaved" component={CardSaved} options={props => ({
-            headerTransparent: true,
-            headerTitleStyle: {
-              color: '#142995',
-              fontSize: 22,
+          <RootStack.Screen name="CardSaved" component={CardSaved} 
+            options={props => ({
+              headerTransparent: true,
+              headerTitleStyle: {
+                color: '#12C2E9',
+                fontSize: 22,
       
-            },
-            headerTitleAlign: 'center',
-            headerTitle: 'Wallet Test' ,
-            headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
+              },
+              headerTitleAlign: 'center',
+              headerTitle: 'cadastro' ,
+              headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
       
-          })}/>
+            })}
+          />
 
         </RootStack.Navigator>
       </QueryClientProvider>

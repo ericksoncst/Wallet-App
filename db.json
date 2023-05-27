@@ -6,20 +6,6 @@
       "cardCvv": "317",
       "cardName": "John Doe",
       "cardExpiration": "15/12/2030"
-    },
-    {
-      "cardNumber": "5623456124651346",
-      "cardCvv": "132",
-      "cardName": "Erick",
-      "cardExpiration": "16/10/2029",
-      "id": "PKZJyMk"
-    },
-    {
-      "cardNumber": "1234567812345678",
-      "cardCvv": "123",
-      "cardName": "Erick2",
-      "cardExpiration": "20/10/2028",
-      "id": "-s6z71e"
     }
   ]
 }

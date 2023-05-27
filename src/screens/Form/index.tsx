@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import  { Masks } from 'react-native-mask-input';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useQueryClient } from 'react-query'
 import { RootStackParamList } from '../../routes/root.routes';
 import BgWrapper from '../../components/Background';
 import Button from '../../components/Button';
@@ -10,6 +11,8 @@ import Input from '../../components/Input';
 import { addCard } from '../../services';
 import { RowContainer } from './styles';
 import validationSchema from './validation';
+import { AxiosResponse } from 'axios';
+import ScreenWrapper from '../../components/ScreenWrapper';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Form'>;
 
@@ -21,8 +24,20 @@ interface IForm {
 
 }
 
+interface CardResponse extends AxiosResponse {
+  data: {
+    cardNumber: string;
+  cardName: string;
+  cardCvv: string;
+  cardExpiration: string;
+  }
+
+}
+
 
 function Form({ navigation }: Props) {
+
+  const queryClient = useQueryClient();
 
   const formik = useFormik<IForm>({
     initialValues: {
@@ -32,8 +47,16 @@ function Form({ navigation }: Props) {
       cardExpiration: '',
   
     },
-    onSubmit: async (data: IForm) => await addCard(data),
-    validationSchema: validationSchema,
+
+
+    onSubmit: async (data: IForm) => {
+      const response: CardResponse = await addCard(data)
+      if(response?.data) {
+        await queryClient.invalidateQueries(['cards'])
+        navigation.navigate('CardSaved', { cardData: response?.data })
+      }
+    },
+    // validationSchema: validationSchema,
     validateOnBlur: false,
     validateOnChange: false,
     validateOnMount: false,
@@ -49,23 +72,25 @@ function Form({ navigation }: Props) {
 
   return (
     <BgWrapper>
-      <React.Fragment>
+      <ScreenWrapper>
+
         <Input 
           keyboardType='numeric'
-          handleChange={ (text) => void handleChange('cardNumber',text)}
+          handleChange={ (text: string) => void handleChange('cardNumber',text)}
           value={values.cardNumber} 
           label='número do cartão'
           mask={Masks.CREDIT_CARD}
         />
           
         <Input 
-          handleChange={ (text) => void handleChange('cardName',text)}
+          handleChange={ (text: string) => void handleChange('cardName',text)}
           value={values.cardName} 
           label='nome do titular do cartão' />
         <RowContainer>
           <Input 
+            width='45'
             keyboardType='numeric'
-            handleChange={ (text) => {
+            handleChange={ (text: string) => {
               console.log(text)
               void handleChange('cardExpiration',text)
             }}
@@ -76,8 +101,9 @@ function Form({ navigation }: Props) {
             
           />
           <Input 
+            width='45'
             keyboardType='numeric'
-            handleChange={ (text) => void handleChange('cardCvv',text)}
+            handleChange={ (text: string) => void handleChange('cardCvv',text)}
             value={values.cardCvv} 
             label='código de segurança'
             placeholder='***'
@@ -89,7 +115,7 @@ function Form({ navigation }: Props) {
           color='#FFF' 
           textColor='#000' 
           disabled={false}/>
-      </React.Fragment>
+      </ScreenWrapper>
     </BgWrapper>
   );
 }

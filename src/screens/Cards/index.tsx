@@ -2,9 +2,11 @@ import * as React from 'react';
 import {
   useQuery,
 } from 'react-query'
+import { AxiosResponse } from 'axios';
 import BgWrapper from '../../components/Background';
+import TabScreen from '../../components/Tab';
 import { getAllCards } from '../../services';
-import { CardItem, CardInfo, CardTitle, List, ListContainer, Tab, TabTitle } from './style';
+import { CardItem, CardInfo, CardTitle, List, ListContainer } from './style';
 
 interface Card {
   id: string;
@@ -15,14 +17,26 @@ interface Card {
 
 }
 
+interface CardResponse  {
+  data: [
+    {
+      id: string;
+      cardNumber: string;
+      cardName: string;
+      cardCvv: string;
+      cardExpiration: string;
+    }
+  ]
+}
+
 
 function Cards() {
 
   
   const { data: cards, isLoading } = useQuery('cards', async () => {
-    const response = await getAllCards();
+    const response: CardResponse = await getAllCards();
     return response;
-  }, {refetchOnWindowFocus: false});
+  }, {staleTime: 1000 * 60});
 
   function maskCreditCard(card: string) {
     const maskedCard = '**** **** **** '+card?.substr(-4);
@@ -38,20 +52,21 @@ function Cards() {
   return (
     <BgWrapper>
       <React.Fragment>
-        <Tab>
-          <TabTitle>Meus cartões</TabTitle>
-        </Tab>
+        <TabScreen />
         <ListContainer>
-          <List  data={cards} renderItem={({item} :{ item: Card } ) => {
-            return (
-              <CardItem>
-                <CardTitle>White Card</CardTitle>
-                <CardInfo height={18}> {item.cardName}</CardInfo>
-                <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
-                <CardInfo>Validade {item.cardExpiration}</CardInfo>
-              </CardItem>
-            )
-          }}
+          <List  
+            data={cards} 
+            keyExtractor={(item: Card) => item.id}
+            renderItem={({item}: {item: Card}) => {
+              return (
+                <CardItem>
+                  <CardTitle>White Card</CardTitle>
+                  <CardInfo height={18}> {item.cardName}</CardInfo>
+                  <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
+                  <CardInfo>Validade {item.cardExpiration}</CardInfo>
+                </CardItem>
+              )
+            }}
           />
         </ListContainer>
       </React.Fragment>

@@ -4,6 +4,7 @@ import { RootStackParamList } from '../../routes/root.routes';
 import Button from '../../components/Button';
 import BgWrapper from '../../components/Background';
 import { ButtonContainer, Title, TitleContainer } from './style';
+import ScreenWrapper from '../../components/ScreenWrapper';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -12,7 +13,7 @@ function HomeScreen({navigation}: Props) {
 
   return (
     <BgWrapper>
-      <React.Fragment>
+      <ScreenWrapper>
         <TitleContainer>
           <Title>Wallet Test</Title>
         </TitleContainer>
@@ -30,7 +31,7 @@ function HomeScreen({navigation}: Props) {
             disabled={false} 
             handlePress={() => navigation.navigate('Form')} />
         </ButtonContainer>
-      </React.Fragment>
+      </ScreenWrapper>
     </BgWrapper>
   );
 }

@@ -3,11 +3,11 @@ import styled from 'styled-components/native'
 export const StyledButton = styled.Pressable<{ color: string }>`
     border-radius: 12px;
     height: 55px;
-    width: 300px;
     backgroundColor: ${props => props.color}
-    margin: 0px 30px 20px 30px;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    margin-bottom: 20px
 `
 
 export const ButtonText = styled.Text<{textColor: string}>`
