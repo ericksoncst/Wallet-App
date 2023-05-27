@@ -10,6 +10,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import HeaderLeft from '../components/HeaderLeft';
+import HeaderRight from '../components/HeaderRight';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient()
@@ -24,9 +27,45 @@ export default function App() {
           screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         
           <RootStack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
-          <RootStack.Screen name="Form" component={Form} />
-          <RootStack.Screen name="Cards" component={Cards} />
-          <RootStack.Screen name="CardSaved" component={CardSaved} />
+          <RootStack.Screen name="Form" component={Form} options={props => ({
+            headerTransparent: true,
+            headerTitleStyle: {
+              color: '#12C2E9',
+              fontSize: 22,
+      
+            },
+            headerTitleAlign: 'center',
+            headerTitle: 'cadastro' ,
+            headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
+      
+          })}
+          />
+          <RootStack.Screen name="Cards" component={Cards}
+            options={props => ({
+              headerTitleStyle: {
+                color: '#142995',
+                fontSize: 22,
+                
+              },
+              headerTitleAlign: 'center',
+              headerTitle: 'Wallet Test' ,
+              headerLeft: () => <HeaderLeft navProps={props} marginTop={8}/>,
+              headerRight: () => <HeaderRight {...props} />
+                
+            })}
+          />
+          <RootStack.Screen name="CardSaved" component={CardSaved} options={props => ({
+            headerTransparent: true,
+            headerTitleStyle: {
+              color: '#142995',
+              fontSize: 22,
+      
+            },
+            headerTitleAlign: 'center',
+            headerTitle: 'Wallet Test' ,
+            headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
+      
+          })}/>
 
         </RootStack.Navigator>
       </QueryClientProvider>

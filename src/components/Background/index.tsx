@@ -10,9 +10,9 @@ function BgWrapper(props: ButtonProp) {
     
   return (
     <Container>
-      <CornerTop />
+      {/* <CornerTop /> */}
       {children}
-      <CornerBottom />
+      {/* <CornerBottom /> */}
     </Container>
   )
 }

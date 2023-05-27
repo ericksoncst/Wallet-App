@@ -1,5 +1,8 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "types": ["react-native", "jest", "styled-components-react-native"],
+  },
   "@typescript-eslint/no-misused-promises": [
     "error",
     {
