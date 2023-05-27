@@ -4,7 +4,7 @@ import {
 } from 'react-query'
 import BgWrapper from '../../components/Background';
 import { getAllCards } from '../../services';
-import { CardItem, CardInfo, CardTitle, List, ListContainer } from './style';
+import { CardItem, CardInfo, CardTitle, List, ListContainer, Tab, TabTitle } from './style';
 
 interface Card {
   id: string;
@@ -37,19 +37,24 @@ function Cards() {
 
   return (
     <BgWrapper>
-      <ListContainer>
-        <List  data={cards} renderItem={({item} :{ item: Card } ) => {
-          return (
-            <CardItem>
-              <CardTitle>White Card</CardTitle>
-              <CardInfo height={18}> {item.cardName}</CardInfo>
-              <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
-              <CardInfo>Validade {item.cardExpiration}</CardInfo>
-            </CardItem>
-          )
-        }}
-        />
-      </ListContainer>
+      <React.Fragment>
+        <Tab>
+          <TabTitle>Meus cartões</TabTitle>
+        </Tab>
+        <ListContainer>
+          <List  data={cards} renderItem={({item} :{ item: Card } ) => {
+            return (
+              <CardItem>
+                <CardTitle>White Card</CardTitle>
+                <CardInfo height={18}> {item.cardName}</CardInfo>
+                <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
+                <CardInfo>Validade {item.cardExpiration}</CardInfo>
+              </CardItem>
+            )
+          }}
+          />
+        </ListContainer>
+      </React.Fragment>
     </BgWrapper>
   );
 }

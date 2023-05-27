@@ -50,7 +50,14 @@ export default function App() {
               headerTitleAlign: 'center',
               headerTitle: 'Wallet Test' ,
               headerLeft: () => <HeaderLeft navProps={props} marginTop={8}/>,
-              headerRight: () => <HeaderRight {...props} />
+              headerRight: () => <HeaderRight {...props} />,
+              headerStyle: {
+                shadowColor: '',
+                shadowOffset: {width: -2, height: 4},
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+                elevation: 20,
+              }
                 
             })}
           />
