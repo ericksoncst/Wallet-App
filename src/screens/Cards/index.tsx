@@ -2,9 +2,9 @@ import * as React from 'react';
 import {
   useQuery,
 } from 'react-query'
-import { AxiosResponse } from 'axios';
 import BgWrapper from '../../components/Background';
 import TabScreen from '../../components/Tab';
+import { maskCreditCard } from '../../helpers';
 import { getAllCards } from '../../services';
 import { CardItem, CardInfo, CardTitle, List, ListContainer } from './style';
 
@@ -37,12 +37,6 @@ function Cards() {
     const response: CardResponse = await getAllCards();
     return response;
   }, {staleTime: 1000 * 60});
-
-  function maskCreditCard(card: string) {
-    const maskedCard = '**** **** **** '+card?.substr(-4);
-    return maskedCard;
-      
-  }
 
   
   if (isLoading) return <CardInfo>{'Loading...'}</CardInfo>

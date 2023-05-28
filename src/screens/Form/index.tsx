@@ -9,7 +9,7 @@ import BgWrapper from '../../components/Background';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { addCard } from '../../services';
-import { RowContainer } from './styles';
+import { RowContainer, Title } from './styles';
 import validationSchema from './validation';
 import { AxiosResponse } from 'axios';
 import ScreenWrapper from '../../components/ScreenWrapper';
@@ -73,8 +73,9 @@ function Form({ navigation }: Props) {
   return (
     <BgWrapper>
       <ScreenWrapper>
-
+        <Title>Wallet test</Title>
         <Input 
+          color='#BBBBBB'
           keyboardType='numeric'
           handleChange={ (text: string) => void handleChange('cardNumber',text)}
           value={values.cardNumber} 

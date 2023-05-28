@@ -16,10 +16,10 @@ export const StyledInput = styled(MaskInput).attrs(
   }
 )``
 
-export const InputLabel = styled.Text`
+export const InputLabel = styled.Text<{color?: string}>`
   margin: 22px 0px 4px 0px;
   font-weight: 400;
   font-size: 16px;
-  color: #BBBBBB;
+  color: ${props => props.color || '#FFF'};
   white-space: nowrap;
 `

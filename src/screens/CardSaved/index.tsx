@@ -6,6 +6,7 @@ import { CardItem, CardTitle, CardInfo, Title, Message } from './style'
 import BgWrapper from '../../components/Background';
 import Button from '../../components/Button';
 import ScreenWrapper from '../../components/ScreenWrapper';
+import { maskCreditCard } from '../../helpers';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CardSaved'>;
 
@@ -13,12 +14,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'CardSaved'>;
 
 function CardSaved({navigation, route}: Props) {
   const cardData  = route.params.cardData;
-
-  function maskCreditCard(card: string) {
-    const maskedCard = '**** **** **** '+card?.substr(-4);
-    return maskedCard;
-      
-  }
 
   return (
     <BgWrapper>
@@ -28,7 +23,7 @@ function CardSaved({navigation, route}: Props) {
         <CardItem>
           <CardTitle>White Card</CardTitle>
           <CardInfo height={18}> {cardData.cardName}</CardInfo>
-          <CardInfo > {maskCreditCard(cardData.cardNumber)}</CardInfo>
+          <CardInfo>{maskCreditCard(cardData.cardNumber)}</CardInfo>
           <CardInfo>Validade {cardData.cardExpiration}</CardInfo>
         </CardItem>
         <Button

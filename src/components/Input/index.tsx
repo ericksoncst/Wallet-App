@@ -6,14 +6,15 @@ interface InputProps extends MaskInputProps {
     handleChange : (field: string, text: string)=> void,
     width?: string;
     label: string;
+    color?: string;
 }
 
 function Input(props: InputProps) {
-  const { handleChange, value, placeholder, keyboardType, width, label, mask } = props;
+  const { handleChange, value, placeholder, keyboardType, width, label, mask, color } = props;
 
   return (
     <InputContainer width={width}>
-      <InputLabel>{label}</InputLabel>
+      <InputLabel color={color}>{label}</InputLabel>
       <StyledInput
         keyboardType={keyboardType}
         onChangeText={handleChange}
