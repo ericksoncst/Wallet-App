@@ -2,8 +2,10 @@
 
 buildscript {
     ext {
+        kotlinVersion = "1.7.0"
         buildToolsVersion = "33.0.0"
-        minSdkVersion = 21
+        minSdkVersion = 27
+        targetSdkVersion = 27
         compileSdkVersion = 33
         targetSdkVersion = 33
 
@@ -13,9 +15,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://maven.google.com' }
+        maven { url "https://www.jitpack.io" }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }

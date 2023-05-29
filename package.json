@@ -8,7 +8,8 @@
     "lint": "eslint --ext .tsx --ext .ts src/",
     "format": "prettier --check ./src",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npx jetify"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -30,15 +31,20 @@
     "axios": "^1.4.0",
     "card-validator": "^8.1.1",
     "formik": "^2.2.9",
+    "jetifier": "^2.0.0",
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-gesture-handler": "^2.10.1",
+    "react-native-image-crop-picker": "^0.40.0",
     "react-native-mask-input": "^1.2.3",
     "react-native-reanimated": "^3.1.0",
     "react-native-safe-area-context": "^4.5.3",
     "react-native-screens": "^3.20.0",
+    "react-native-text-recognition": "^1.0.0",
+    "react-native-vision-camera": "^2.15.4",
     "react-query": "^3.39.3",
     "styled-components": "5.3.5",
+    "vision-camera-ocr": "^1.0.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
@@ -51,7 +57,7 @@
     "@types/react": "^18.0.24",
     "@types/react-native-vector-icons": "^6.4.13",
     "@types/react-test-renderer": "^18.0.0",
-    "@types/styled-components-react-native": "5.1.6",
+    "@types/styled-components-react-native": "5.2.1",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "babel-jest": "^29.2.1",
