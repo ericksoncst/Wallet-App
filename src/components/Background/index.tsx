@@ -1,8 +1,8 @@
-import React, { ReactElement, ReactNode } from 'react' 
+import React, { ReactNode } from 'react' 
 import { Container, CornerBottom, CornerTop } from './style';
 
 type ButtonProp = {
-    children: ReactElement | ReactNode
+    children:  ReactNode | ReactNode[]
 }
 
 function BgWrapper(props: ButtonProp) {

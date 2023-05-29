@@ -1,16 +1,18 @@
 import React from 'react'
-import {  MaskInputProps } from 'react-native-mask-input';
-import { InputContainer, InputLabel, StyledInput } from './styles';
+import  {  MaskInputProps } from 'react-native-mask-input';
+import { InputContainer, InputLabel, StyledInput, Error } from './styles';
 
-interface InputProps extends MaskInputProps {
+interface IInputProps extends MaskInputProps {
     handleChange : (field: string, text: string)=> void,
     width?: string;
     label: string;
     color?: string;
     withIcon?: boolean | false;
+    error?: string | '' ;
+    touched?: boolean;
 }
 
-function Input(props: InputProps) {
+function Input(props: IInputProps) {
   const { 
     handleChange, 
     value, 
@@ -20,7 +22,9 @@ function Input(props: InputProps) {
     label, 
     mask, 
     color, 
-    withIcon
+    withIcon,
+    error,
+    touched
   } = props;
 
 
@@ -35,6 +39,7 @@ function Input(props: InputProps) {
         placeholder={placeholder} 
         mask={mask}
       />
+      {error && touched && <Error>{error}</Error>}
     </InputContainer>
   )
 }

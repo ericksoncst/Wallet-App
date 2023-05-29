@@ -2,7 +2,7 @@ import  React, {useCallback, useState, useRef, useEffect} from 'react';
 import { useFormik } from 'formik'
 import {
   Linking,
-  Alert
+  Alert,
 } from 'react-native';
 import  { Masks } from 'react-native-mask-input';
 import TextRecognition from 'react-native-text-recognition';
@@ -57,6 +57,7 @@ function Form({ navigation }: Props) {
   const [openCamera, setOpenCamera] = useState<boolean>(false);
 
 
+
   const formik = useFormik<IForm>({
     initialValues: {
       cardNumber: '',
@@ -72,19 +73,20 @@ function Form({ navigation }: Props) {
       if(response?.data) {
         await queryClient.invalidateQueries(['cards'])
         navigation.navigate('CardSaved', { cardData: response?.data })
+        formik.resetForm({})
       }
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     validateOnBlur: false,
-    validateOnChange: false,
     validateOnMount: false,
   })
 
 
 
-  const { values, setFieldValue, handleSubmit, errors } =  formik
+  const { values, setFieldValue, handleSubmit, errors, touched, setFieldTouched } =  formik
 
   async function handleChange(field: string,text: string) {
+    void setFieldTouched(field)
     await setFieldValue(field, text.toString())
   }
 
@@ -168,7 +170,7 @@ function Form({ navigation }: Props) {
           }>
             <Icon name='camera' size={22} color='#FFF' />
           </IconContainer>
-          <Input           
+          <Input
             withIcon
             color='#BBBBBB'
             keyboardType='numeric'
@@ -176,13 +178,19 @@ function Form({ navigation }: Props) {
             value={values.cardNumber} 
             label='número do cartão'
             mask={Masks.CREDIT_CARD}
+            error={errors.cardNumber}
+            touched={touched.cardNumber}
+
           />
         </Wrapper>
           
         <Input 
           handleChange={ (text: string) => void handleChange('cardName',text)}
           value={values.cardName} 
-          label='nome do titular do cartão' />
+          label='nome do titular do cartão'
+          error={errors.cardName}
+          touched={touched.cardName}
+        />
         <RowContainer>
           <Input 
             width='45'
@@ -195,6 +203,9 @@ function Form({ navigation }: Props) {
             label='vencimento'
             placeholder='00/00'
             mask={[/[0-1]/, /[0-9]/, '/', /[2-3]/, /[0-9]/]}
+            error={errors.cardExpiration}
+            touched={touched.cardExpiration}
+
             
           />
           <Input 
@@ -205,6 +216,9 @@ function Form({ navigation }: Props) {
             label='código de segurança'
             placeholder='***'
             obfuscationCharacter='*'
+            error={errors.cardCvv}
+            touched={touched.cardCvv}
+
           />
         </RowContainer>
         <Button 

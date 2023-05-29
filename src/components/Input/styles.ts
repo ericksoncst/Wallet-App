@@ -25,3 +25,10 @@ export const InputLabel = styled.Text<{color?: string}>`
   color: ${props => props.color || '#FFF'};
   flex-grow: 1;
 `
+
+export const Error = styled.Text`
+    margin-top: 5px;
+    color: #F00;
+    flex-grow: 1;
+    font-size: 12px;
+`
