@@ -10,7 +10,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import HeaderLeft from '../components/HeaderLeft';
 import HeaderRight from '../components/HeaderRight';
 
@@ -27,7 +26,7 @@ export default function App() {
           screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         
           <RootStack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
-          <RootStack.Screen name="Form" component={Form} options={props => ({
+          <RootStack.Screen name="Form" component={Form} options={() => ({
             headerTransparent: true,
             headerTitleStyle: {
               color: '#12C2E9',
@@ -36,7 +35,7 @@ export default function App() {
             },
             headerTitleAlign: 'center',
             headerTitle: 'cadastro' ,
-            headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
+            headerLeft: () => <HeaderLeft  marginTop={0}/>
       
           })}
           />
@@ -49,8 +48,8 @@ export default function App() {
               },
               headerTitleAlign: 'center',
               headerTitle: 'Wallet Test' ,
-              headerLeft: () => <HeaderLeft navProps={props} marginTop={8}/>,
-              headerRight: () => <HeaderRight {...props} />,
+              headerLeft: () => <HeaderLeft  marginTop={8}/>,
+              headerRight: () => <HeaderRight />,
               headerStyle: {
                 shadowColor: '',
                 shadowOffset: {width: -2, height: 4},
@@ -62,7 +61,7 @@ export default function App() {
             })}
           />
           <RootStack.Screen name="CardSaved" component={CardSaved} 
-            options={props => ({
+            options={() => ({
               headerTransparent: true,
               headerTitleStyle: {
                 color: '#12C2E9',
@@ -71,7 +70,7 @@ export default function App() {
               },
               headerTitleAlign: 'center',
               headerTitle: 'cadastro' ,
-              headerLeft: () => <HeaderLeft navProps={props} marginTop={0}/>
+              headerLeft: () => <HeaderLeft  marginTop={0}/>
       
             })}
           />

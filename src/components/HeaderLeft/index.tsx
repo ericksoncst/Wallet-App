@@ -1,25 +1,21 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/Octicons'
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../routes/root.routes';
+import { useNavigation } from '@react-navigation/native';
+
 import { Container, IconContainer } from './style';
 
-type Props = NativeStackScreenProps<RootStackParamList>;
-
-type HProps = {
-  navProps: Props;
-  marginTop: number | 0
-}
+type HProps = { marginTop: number | 0 }
 
 
 
 function HeaderLeft(props: HProps)  {
-
-  const { navProps, marginTop } = props;
+  
+  const { marginTop } = props;
+  const navigation = useNavigation();
 
   return (
     <Container 
-      onPress={() => navProps.navigation.goBack() }>
+      onPress={() => navigation.goBack() }>
       <IconContainer marginTop={marginTop}>
         <Icon name='arrow-left' size={22} color='#12C2E9' />
       </IconContainer>
