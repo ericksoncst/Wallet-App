@@ -8,7 +8,7 @@ interface ButtonProps {
   title: string;
   disabled: boolean | false;
   textColor: string;
-  handlePress: (event: GestureResponderEvent) => void
+  handlePress: (event: GestureResponderEvent) => void,
 }
 
 function Button(props: ButtonProps) {
@@ -16,6 +16,7 @@ function Button(props: ButtonProps) {
 
 
   return <StyledButton 
+    testID='cSubmit'
     disabled={disabled} 
     color={color} 
     onPress={handlePress}>

@@ -1,16 +1,17 @@
 import * as React from 'react';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/root.routes';
 import Button from '../../components/Button';
 import BgWrapper from '../../components/Background';
 import { ButtonContainer, Title, TitleContainer } from './style';
 import ScreenWrapper from '../../components/ScreenWrapper';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type NavigationProps = StackNavigationProp<RootStackParamList, 'Home'>
 
+function HomeScreen() {
 
-function HomeScreen({navigation}: Props) {
-
+  const navigation = useNavigation<NavigationProps>()
   return (
     <BgWrapper>
       <ScreenWrapper>

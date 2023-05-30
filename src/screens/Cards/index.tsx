@@ -1,12 +1,13 @@
 import * as React from 'react';
+import {Text} from 'react-native'
 import {
   useQuery,
 } from 'react-query'
 import BgWrapper from '../../components/Background';
 import TabScreen from '../../components/Tab';
-import { maskCreditCard } from '../../helpers';
 import { getAllCards } from '../../services';
-import { CardItem, CardInfo, CardTitle, List, ListContainer } from './style';
+import { CardList } from './CardList';
+import {  ListContainer } from './style';
 
 interface Card {
   id: string;
@@ -14,32 +15,18 @@ interface Card {
   cardName: string;
   cardCvv: string;
   cardExpiration: string;
-
 }
-
-interface CardResponse  {
-  data: [
-    {
-      id: string;
-      cardNumber: string;
-      cardName: string;
-      cardCvv: string;
-      cardExpiration: string;
-    }
-  ]
-}
-
 
 function Cards() {
 
-  
-  const { data: cards, isLoading } = useQuery('cards', async () => {
-    const response: CardResponse = await getAllCards();
+
+  const { data: cards, isLoading } = useQuery('cards', async () : Promise<Card[]> => {
+    const response = await getAllCards();
     return response;
   }, {staleTime: 1000 * 60});
 
   
-  if (isLoading) return <CardInfo>{'Loading...'}</CardInfo>
+  if (isLoading) return <Text>{'Loading...'}</Text>
   console.log(cards)
 
 
@@ -48,20 +35,7 @@ function Cards() {
       <React.Fragment>
         <TabScreen />
         <ListContainer>
-          <List  
-            data={cards} 
-            keyExtractor={(item: Card) => item.id}
-            renderItem={({item}: {item: Card}) => {
-              return (
-                <CardItem>
-                  <CardTitle>White Card</CardTitle>
-                  <CardInfo height={18}> {item.cardName}</CardInfo>
-                  <CardInfo > {maskCreditCard(item.cardNumber)}</CardInfo>
-                  <CardInfo>Validade {item.cardExpiration}</CardInfo>
-                </CardItem>
-              )
-            }}
-          />
+          <CardList cards={cards} />
         </ListContainer>
       </React.Fragment>
     </BgWrapper>

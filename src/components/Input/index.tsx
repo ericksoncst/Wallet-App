@@ -10,6 +10,7 @@ interface IInputProps extends MaskInputProps {
     withIcon?: boolean | false;
     error?: string | '' ;
     touched?: boolean;
+    testID: string;
 }
 
 function Input(props: IInputProps) {
@@ -24,7 +25,8 @@ function Input(props: IInputProps) {
     color, 
     withIcon,
     error,
-    touched
+    touched,
+    testID
   } = props;
 
 
@@ -32,6 +34,7 @@ function Input(props: IInputProps) {
     <InputContainer width={width} >
       <InputLabel color={color}>{label}</InputLabel>
       <StyledInput
+        testID={testID}
         withIcon={withIcon}
         keyboardType={keyboardType}
         onChangeText={handleChange}
@@ -39,7 +42,7 @@ function Input(props: IInputProps) {
         placeholder={placeholder} 
         mask={mask}
       />
-      {error && touched && <Error>{error}</Error>}
+      {error && touched && <Error testID={`err${testID}`}>{error}</Error>}
     </InputContainer>
   )
 }

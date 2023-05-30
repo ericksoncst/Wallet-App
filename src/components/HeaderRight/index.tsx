@@ -1,17 +1,17 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/AntDesign'
 import { RootStackParamList } from '../../routes/root.routes';
 
 
 import { Container, IconContainer } from './style'
+import { StackNavigationProp } from '@react-navigation/stack';
 
 
 
 function HeaderRight()  {
 
-  const { navigation } = useNavigation<NativeStackScreenProps<RootStackParamList>>();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
 
   return (

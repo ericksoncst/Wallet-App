@@ -1,20 +1,19 @@
 import React from 'react';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-
 import { RootStackParamList } from '../../routes/root.routes';
 import { CardItem, CardTitle, CardInfo, Title, Message } from './style'
 import BgWrapper from '../../components/Background';
 import Button from '../../components/Button';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import { maskCreditCard } from '../../helpers';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'CardSaved'>;
 
 
-
-function CardSaved({navigation, route}: Props) {
-  const cardData  = route.params.cardData;
-
+function CardSaved() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'CardSaved'>>();
+  const cardData = useRoute<RouteProp<RootStackParamList, 'CardSaved'>>().params.cardData;
+  
   return (
     <BgWrapper>
       <ScreenWrapper>

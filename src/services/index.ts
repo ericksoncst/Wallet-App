@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 type Card = {
-    cvv: string ;
-    id: string ;
-    name : string;
-    number : string;
+    id: string;
+    cardNumber: string;
+    cardName: string;
+    cardCvv: string;
+    cardExpiration: string;
   }
 
   type CardForm = {

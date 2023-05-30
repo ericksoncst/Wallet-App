@@ -11,7 +11,6 @@ import {
   CameraPermissionRequestResult,
   useCameraDevices,
 } from 'react-native-vision-camera';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useQueryClient } from 'react-query'
 import { RootStackParamList } from '../../routes/root.routes';
 import BgWrapper from '../../components/Background';
@@ -24,9 +23,11 @@ import { AxiosResponse } from 'axios';
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 import ScreenWrapper from '../../components/ScreenWrapper';
 import { MyCamera } from './Camera';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Form'>;
+type Props = StackNavigationProp<RootStackParamList, 'Form'>;
 
 interface IForm {
   cardNumber: string;
@@ -47,12 +48,14 @@ interface CardResponse extends AxiosResponse {
 }
 
 
-function Form({ navigation }: Props) {
+function Form() {
+
+  const navigation = useNavigation<Props>()
 
   const queryClient = useQueryClient();
   const camera = useRef<Camera>(null);
   const devices = useCameraDevices();
-  const device = devices.back;
+  const device = devices?.back;
   const [hasPermissions, setHasPermissions] = useState<boolean>(false);
   const [openCamera, setOpenCamera] = useState<boolean>(false);
 
@@ -156,13 +159,13 @@ function Form({ navigation }: Props) {
     <BgWrapper>
       <ScreenWrapper>
         <Title>Wallet test</Title>
-        {device && hasPermissions && openCamera && <MyCamera 
+        {device && hasPermissions && openCamera ? <MyCamera 
           active={openCamera} 
           ref={camera} 
-          device={device}
           onHandlePress={() => void captureAndRecognize()}
           onHandleClose={()=> setOpenCamera(false)}
-        />}
+          device={device}
+        /> : null}
 
         <Wrapper>
           <IconContainer  onPress={
@@ -171,6 +174,7 @@ function Form({ navigation }: Props) {
             <Icon name='camera' size={22} color='#FFF' />
           </IconContainer>
           <Input
+            testID='cNumber'
             withIcon
             color='#BBBBBB'
             keyboardType='numeric'
@@ -185,6 +189,7 @@ function Form({ navigation }: Props) {
         </Wrapper>
           
         <Input 
+          testID='cName'
           handleChange={ (text: string) => void handleChange('cardName',text)}
           value={values.cardName} 
           label='nome do titular do cartão'
@@ -193,10 +198,10 @@ function Form({ navigation }: Props) {
         />
         <RowContainer>
           <Input 
+            testID='cExpiration'
             width='45'
             keyboardType='numeric'
             handleChange={ (text: string) => {
-              console.log(text)
               void handleChange('cardExpiration',text)
             }}
             value={values.cardExpiration} 
@@ -209,6 +214,7 @@ function Form({ navigation }: Props) {
             
           />
           <Input 
+            testID='cCvv'
             width='45'
             keyboardType='numeric'
             handleChange={ (text: string) => void handleChange('cardCvv',text)}
