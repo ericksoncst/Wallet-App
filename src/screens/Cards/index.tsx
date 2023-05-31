@@ -1,5 +1,5 @@
-import * as React from 'react';
-import {Text} from 'react-native'
+
+import  React from 'react';
 import {
   useQuery,
 } from 'react-query'
@@ -18,26 +18,20 @@ interface Card {
 }
 
 function Cards() {
-
-
+  
   const { data: cards, isLoading } = useQuery('cards', async () : Promise<Card[]> => {
     const response = await getAllCards();
     return response;
   }, {staleTime: 1000 * 60});
 
-  
-  if (isLoading) return <Text>{'Loading...'}</Text>
-  console.log(cards)
-
-
   return (
-    <BgWrapper>
-      <React.Fragment>
+    <BgWrapper isLoading={isLoading}>
+      {!isLoading && <React.Fragment>
         <TabScreen />
         <ListContainer>
           <CardList cards={cards} />
         </ListContainer>
-      </React.Fragment>
+      </React.Fragment>}
     </BgWrapper>
   );
 }

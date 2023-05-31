@@ -13,7 +13,7 @@ interface Card {
   }
 
 interface Props {
-  cards?: Card[] | []
+  cards: Card[]
 }
 
 export function CardList(props: Props) {
