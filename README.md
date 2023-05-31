@@ -3,6 +3,10 @@
 How to run that project:
 
 ```bash
+git clone https://github.com/ericksoncst/Wallet-App.git
+```
+
+```bash
 git checkout master
 ```
 
@@ -46,7 +50,7 @@ yarn test
 
 ## Note 2 ⚠️ ⚠️:
 
-Change IP address on .env
+Change API_URL on .env key
 
 
 ```typescript
