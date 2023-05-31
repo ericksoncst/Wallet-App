@@ -5,7 +5,7 @@ interface ICard {
     cardName: string;
     cardCvv: string;
     cardExpiration: string;
-  
+    id: string;
   }
 }
 
@@ -14,6 +14,6 @@ export type RootStackParamList = {
     Form: undefined;
     Cards: undefined;
     CardSaved: ICard;
-    Wallet: ICard;
+    Wallet: undefined;
 
 };

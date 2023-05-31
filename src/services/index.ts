@@ -16,7 +16,6 @@ type Card = {
     cardName : string;
     cardNumber : string;
     cardExpiration : string;
-
   }
 
 type CardsResponse = {
@@ -31,6 +30,15 @@ export const getAllCards = async () => {
 }
 
 export const addCard = async (data: CardForm) => {
-  const response = await axios.post(`${Config.API_URL}/cards`, data)
-  return response;
+  const { data: res }: {
+    data: Card
+  } = await axios.post(`${Config.API_URL}/cards`, data)
+  return res;
+}
+
+export const getCardById = async (id: string) => {
+  const { data }: {
+    data: Card
+  } = await axios.get(`${Config.API_URL}/cards/${id}`)
+  return data;
 }

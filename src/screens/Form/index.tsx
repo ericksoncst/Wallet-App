@@ -33,18 +33,7 @@ interface IForm {
   cardNumber: string;
   cardName: string;
   cardCvv: string;
-  cardExpiration: string;
-
-}
-
-interface CardResponse extends AxiosResponse {
-  data: {
-    cardNumber: string;
-  cardName: string;
-  cardCvv: string;
-  cardExpiration: string;
-  }
-
+  cardExpiration: string
 }
 
 
@@ -67,15 +56,14 @@ function Form() {
       cardCvv: '',
       cardName: '',
       cardExpiration: '',
-  
     },
 
 
     onSubmit: async (data: IForm) => {
-      const response: CardResponse = await addCard(data)
-      if(response?.data) {
+      const response = await addCard(data)
+      if(response) {
         await queryClient.invalidateQueries(['cards'])
-        navigation.navigate('CardSaved', { cardData: response?.data })
+        navigation.navigate('CardSaved', { cardData: response })
         formik.resetForm({})
       }
     },

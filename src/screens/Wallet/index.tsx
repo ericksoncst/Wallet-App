@@ -50,19 +50,21 @@ export const Wallet = () => {
 
   return (
     <BgWrapper isLoading={isLoading}>
-      <TabScreen />
-      <View style={{ flex: 1, justifyContent: 'center', marginTop: '10%'}}>
-        <AnimatedFlatList
-          scrollEventThrottle={16}
-          bounces={false}
-          {...{ onScroll }}
-          data={cards}
-          renderItem={({ index, item }) => (
-            <WalletCard {...{ index, y,item }} />
-          )}
-          keyExtractor={(item) => `${item?.index}`}
-        />
-      </View>
+      {!isLoading && <>
+        <TabScreen />
+        <View style={{ flex: 1, justifyContent: 'center', marginTop: '10%'}}>
+          <AnimatedFlatList
+            scrollEventThrottle={16}
+            bounces={false}
+            {...{ onScroll }}
+            data={cards}
+            renderItem={({ index, item }) => (
+              <WalletCard {...{ index, y,item }} />
+            )}
+            keyExtractor={(item) => `${item?.index}`}
+          />
+        </View>
+      </>}
     </BgWrapper>
   );
 }
