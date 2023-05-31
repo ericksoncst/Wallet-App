@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Config from 'react-native-config';
+
+
 
 type Card = {
     id: string;
@@ -19,14 +22,15 @@ type Card = {
 type CardsResponse = {
     data: Card[]
   }
-  
+
+console.log(`${Config.API_URL}/cards`)
   
 export const getAllCards = async () => {
-  const response: CardsResponse = await axios.get('http://192.168.0.40:3000/cards')
+  const response: CardsResponse = await axios.get(`${Config.API_URL}/cards`)
   return response.data;
 }
 
 export const addCard = async (data: CardForm) => {
-  const response = await axios.post('http://192.168.0.40:3000/cards', data)
+  const response = await axios.post(`${Config.API_URL}/cards`, data)
   return response;
 }
