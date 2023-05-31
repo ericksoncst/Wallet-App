@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect } from 'react' 
+import React, { ReactNode, useEffect, useMemo } from 'react' 
 import { Container } from './style';
-import { Animated, Dimensions } from 'react-native'
+import { Animated } from 'react-native'
 
 type ButtonProp = {
     children:  ReactNode | ReactNode[],
@@ -11,8 +11,8 @@ type ButtonProp = {
 function BgWrapper(props: ButtonProp) {
   const { children, isLoading } = props;
 
-  const wTest = new Animated.Value(349);
-  const hTest = new Animated.Value(235);
+  const wTest = useMemo(() => new Animated.Value(349),[]);
+  const hTest = useMemo(() => new Animated.Value(235),[]);
 
 
   useEffect(() => {

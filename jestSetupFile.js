@@ -35,3 +35,9 @@ jest.mock('@react-navigation/native', () => {
     },
   };
 });
+
+jest.mock(
+  './node_modules/react-native/Libraries/Animated/Easing.js',
+);
+
+jest.mock('./node_modules/react-native/Libraries/Animated/animations/TimingAnimation.js')

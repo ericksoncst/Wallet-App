@@ -28,6 +28,5 @@ export const getAllCards = async () => {
 
 export const addCard = async (data: CardForm) => {
   const response = await axios.post('http://192.168.0.40:3000/cards', data)
-  console.log(response)
   return response;
 }
