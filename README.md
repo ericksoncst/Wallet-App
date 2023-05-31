@@ -22,6 +22,9 @@ npm i
 ```
 
 ## Starting Json Server
+follow the instructions to install:
+
+https://github.com/typicode/json-server
 
 My commits already have a db.json. Follow that config:
 
