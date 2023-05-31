@@ -12,6 +12,7 @@ import {
 } from 'react-query'
 import HeaderLeft from '../components/HeaderLeft';
 import HeaderRight from '../components/HeaderRight';
+import { Wallet } from '../screens/Wallet';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient()
@@ -22,7 +23,7 @@ export default function App() {
     
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
-        <RootStack.Navigator initialRouteName="Home"
+        <RootStack.Navigator initialRouteName="Wallet"
           screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         
           <RootStack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
@@ -39,27 +40,6 @@ export default function App() {
       
           })}
           />
-          <RootStack.Screen name="Cards" component={Cards}
-            options={props => ({
-              headerTitleStyle: {
-                color: '#142995',
-                fontSize: 22,
-                
-              },
-              headerTitleAlign: 'center',
-              headerTitle: 'Wallet Test' ,
-              headerLeft: () => <HeaderLeft  marginTop={8}/>,
-              headerRight: () => <HeaderRight />,
-              headerStyle: {
-                shadowColor: '',
-                shadowOffset: {width: -2, height: 4},
-                shadowOpacity: 0.2,
-                shadowRadius: 10,
-                elevation: 20,
-              }
-                
-            })}
-          />
           <RootStack.Screen name="CardSaved" component={CardSaved} 
             options={() => ({
               headerTransparent: true,
@@ -72,6 +52,27 @@ export default function App() {
               headerTitle: 'cadastro' ,
               headerLeft: () => <HeaderLeft  marginTop={0}/>
       
+            })}
+          />
+          <RootStack.Screen name="Cards" component={Wallet}
+            options={props => ({
+              headerTitleStyle: {
+                color: '#142995',
+                fontSize: 22,
+              
+              },
+              headerTitleAlign: 'center',
+              headerTitle: 'Wallet Test' ,
+              headerLeft: () => <HeaderLeft  marginTop={8}/>,
+              headerRight: () => <HeaderRight />,
+              headerStyle: {
+                shadowColor: '',
+                shadowOffset: {width: -2, height: 4},
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+                elevation: 20,
+              }
+              
             })}
           />
 

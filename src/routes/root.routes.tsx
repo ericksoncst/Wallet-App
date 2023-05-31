@@ -14,4 +14,6 @@ export type RootStackParamList = {
     Form: undefined;
     Cards: undefined;
     CardSaved: ICard;
+    Wallet: ICard;
+
 };
